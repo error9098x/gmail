@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.helper import send_email
-from utils.constant import (SMTP_SERVER_ADDRESS, PORT, SENDER_PASSWORD, SENDER_ADDRESS)
+#from utils.constant import (SMTP_SERVER_ADDRESS, PORT, SENDER_PASSWORD, SENDER_ADDRESS)
 
 
 def main():
