@@ -27,7 +27,7 @@ def main():
     Email Address of User: {}
     User Full Name: {}
     ----------------------------------------
-    """.format(email, fullName)
+    """.format(youremail, fullName)
 
             message = extra_info + text
 
