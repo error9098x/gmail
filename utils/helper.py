@@ -5,13 +5,14 @@ from email.header import Header
 from email.mime.application import MIMEApplication
 from email.utils import COMMASPACE
 
-def send_email(sender, password, receiver, smtp_server, smtp_port, email_message, subject, attachment=None, is_html=False):
+def send_email(sender, password, receiver, smtp_server, smtp_port, email_message, subject, attachment=None, is_html=False,cc=None):
     # Create a MIMEMultipart object to combine the different parts of the email
     message = MIMEMultipart()
     message['To'] = COMMASPACE.join([receiver])  # Allow for a list of receivers
     message['From'] = sender
     message['Subject'] = subject
-
+    if cc:
+        message["Cc"] = cc
     # Attach the email body
     if is_html:
         # For HTML messages

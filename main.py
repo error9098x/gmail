@@ -7,7 +7,8 @@ def main():
     with st.form("Email Form"):
         subject = st.text_input(label='Subject', placeholder="Please enter subject of your mail")
         fullName = st.text_input(label='Full Name', placeholder="Please enter your full name")
-        email = st.text_input(label='Email Address', placeholder="Please enter your email address")
+        email = st.text_input(label='Email Address', placeholder="Please enter email address of the government entity")
+        youremail = st.text_input(label='Email Address', placeholder="Please enter your email address")
         text = st.text_area(label='Email Text', placeholder="Please enter your text here")
         uploaded_file = st.file_uploader("Attachment")
         submit_res = st.form_submit_button(label='Send')
@@ -24,7 +25,7 @@ Sender Full Name: {}
 
         send_email(sender=SENDER_ADDRESS, password=SENDER_PASSWORD,
                    receiver=email, smtp_server=SMTP_SERVER_ADDRESS, smtp_port=PORT,
-                   email_message=message, subject=subject, attachment=uploaded_file)
+                   email_message=message, subject=subject, attachment=uploaded_file,cc=youremail)
 
 if __name__ == '__main__':
     st.write("This is the base structure of the app which will be completed")
