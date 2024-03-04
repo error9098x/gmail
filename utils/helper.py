@@ -8,12 +8,17 @@ from email.utils import COMMASPACE
 def send_email(sender, password, receiver, smtp_server, smtp_port, email_message, subject, attachment=None, is_html=False,cc=None):
     # Create a MIMEMultipart object to combine the different parts of the email
     message = MIMEMultipart()
-    message['To'] = COMMASPACE.join([receiver])  # Allow for a list of receivers
+      # Allow for a list of receivers
     message['From'] = sender
     message['Subject'] = subject
+    message['To'] = receiver
+    all_recipients = [receiver]
     if cc:
-        message["Cc"] = cc
-    # Attach the email body
+        message['Cc'] = cc
+        CCADDR=cc
+        all_recipients = [receiver] + [cc]
+    
+
     if is_html:
         # For HTML messages
         message.attach(MIMEText(email_message, 'html', 'utf-8'))
@@ -35,7 +40,7 @@ def send_email(sender, password, receiver, smtp_server, smtp_port, email_message
     server.starttls()  # Start TLS encryption for the connection
     server.login(sender, password)  # Log in to the server using the provided credentials
     text = message.as_string()  # Convert the message to a string
-    server.sendmail(sender, receiver, text)  # Send the email
+    server.sendmail(sender, all_recipients, text)  # Send the email
     server.quit()  # Terminate the server connection
 
 # Now you can call send_email function with the is_html parameter set to True if you are sending an HTML email.
